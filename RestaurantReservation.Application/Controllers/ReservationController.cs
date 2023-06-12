@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RestaurantReservation.Application.ViewModels;
 using RestaurantReservation.Data.Connection;
 using RestaurantReservation.Domain.Models;
@@ -18,25 +20,38 @@ public class ReservationController : ControllerBase
     }
 
     [HttpPost("reservations")]
-    public async Task<IActionResult> MakeReservationAsync([FromServices] AppDbContext context, [FromBody] CreateReservationViewModel model)
+    public async Task<IActionResult> MakeReservationAsync([FromServices] AppDbContext context, [FromBody] MakeReservationViewModel model)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var reservations = context.Reservations;
+        var availableTables = await context.Tables.ToListAsync();
         var reservation = new Reservation
         {
             Date = model.Date,
             Time = model.Time,
-            People = model.People
+            People = model.People,
         };
+        var reservations = await context.Reservations.AsNoTracking().Where(res => res.Date == reservation.Date).ToListAsync();
 
-        if (reservations.Any(res => res.Date == reservation.Date && res.Time == reservation.Time))
-            return Conflict("Date and Time already booked");
+        foreach (var table in availableTables.Where(tb => tb.Seats == reservation.People))
+        {
+            var currentReservation = reservations.FirstOrDefault(res => (reservation.Time >= res.Time.Add(new TimeSpan(0, -59, -59)) || 
+                                                                 reservation.Time <= res.Time.Add(new TimeSpan(0, 59, 59))) && res.TableId == table.Id);
+
+            if (currentReservation == null)
+                continue;
+
+            reservation.TableId = table.Id;
+            break;
+        }
+
+        if (reservation.TableId == -1)
+            return Conflict("No available tables");
 
         try
         {
-            await reservations.AddAsync(reservation);
+            await context.Reservations.AddAsync(reservation);
             await context.SaveChangesAsync();
             return Created($"v1/reservations/{reservation.Id}", reservation);
         }

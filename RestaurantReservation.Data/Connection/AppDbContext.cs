@@ -10,4 +10,10 @@ public class AppDbContext :  DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
         => optionsBuilder.UseSqlite("Data Source=../RestaurantReservation.Data/restaurant.db;Cache=Shared");
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Reservation>().Ignore(reservation => reservation.Table);
+        base.OnModelCreating(modelBuilder);
+    }
 }
