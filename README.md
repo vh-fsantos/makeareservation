@@ -9,7 +9,7 @@ Make a reservation is a .NET Core API that allows you to Make a reservation dinn
 - Clone the repo
 - Open your terminal
 - On the root folder of the repo type `cd src/ReservationRestaurant.Data`
-- Run the migrations with `dotnet ef databse update`
+- Run the migrations with `dotnet ef database update`
 - Navigate to main project `cd ../ReservationRestaurant`
 - Clean the solution with `dotnet clean`
 - Build the solution with `dotnet build`
