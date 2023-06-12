@@ -18,15 +18,13 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())
-        {
             app.UseDeveloperExceptionPage();
-        }
 
         app.UseSwagger();
         app.UseSwaggerUI();
+        app.UseRouting();
         app.UseHttpsRedirection();
         app.UseAuthorization();
-        app.UseRouting();
         app.UseEndpoints(endpoints => endpoints.MapControllerRoute("default", "{controller=home}/{action=Index}/{id?}"));
     }
 }
