@@ -8,9 +8,6 @@ public class AppDbContext :  DbContext
     public virtual DbSet<Table> Tables { get; set; }
     public virtual DbSet<Reservation> Reservations { get; set; }
 
-    public async Task<int> SaveChangesAsync() 
-        => await base.SaveChangesAsync();
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
         => optionsBuilder.UseSqlite("Data Source=../RestaurantReservation.Data/restaurant.db;Cache=Shared");
 

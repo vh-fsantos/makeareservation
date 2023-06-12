@@ -8,6 +8,9 @@ public class Table
 
     public bool IsAvailable(DateOnly date, TimeOnly time)
     {
+        if (time < new TimeOnly(18, 0, 0) || time > new TimeOnly(23, 0, 0) || date < DateOnly.FromDateTime(DateTime.Now))
+            return false;
+
         foreach (var reservation in Reservations)
         {
             if (reservation.Date != date)
