@@ -11,8 +11,8 @@ namespace RestaurantReservation.Application.Controllers;
 [Route("v1/reservations")]
 public class ReservationController : ControllerBase
 {
-    [HttpGet("{phone}")]
-    public async Task<IActionResult> GetPastReservationsAsync([FromServices] AppDbContext context, [FromRoute] GetPastReservationsViewModel model)
+    [HttpGet]
+    public async Task<IActionResult> GetPastReservationsAsync([FromServices] AppDbContext context, [FromQuery] GetPastReservationsViewModel model)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

@@ -6,10 +6,10 @@ using RestaurantReservation.Data.Connection;
 namespace RestaurantReservation.Application.Controllers;
 
 [ApiController]
-[Route("v1")]
+[Route("v1/tables")]
 public class TableController : ControllerBase
 {
-    [HttpGet("tables")]
+    [HttpGet]
     public async Task<IActionResult> GetAvailableTablesAsync([FromServices] AppDbContext context, [FromQuery] GetAvailableTablesViewModel model)
     {
         if (!ModelState.IsValid)
