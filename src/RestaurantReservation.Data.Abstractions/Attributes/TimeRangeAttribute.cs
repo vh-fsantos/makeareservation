@@ -13,7 +13,7 @@ public class TimeRangeAttribute : ValidationAttribute
         Maximum = TimeOnly.Parse(maximum);
     }
 
-    public override bool IsValid(object value)
+    public override bool IsValid(object? value)
     {
         if (value is TimeOnly time)
             return time >= Minimum && time <= Maximum;
