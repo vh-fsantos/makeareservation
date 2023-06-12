@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RestaurantReservation.Application.Extensions;
 using RestaurantReservation.Data.Extensions;
 
 namespace RestaurantReservation;
@@ -7,7 +8,7 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers();
+        services.AddControllers(options => options.UseCustomConverters());
         services.Configure<ApiBehaviorOptions>(options =>
         {
             options.SuppressModelStateInvalidFilter = true;

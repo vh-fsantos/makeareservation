@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestaurantReservation.Application.ViewModels;
 using RestaurantReservation.Data.Connection;
@@ -7,17 +8,21 @@ using RestaurantReservation.Domain.Models;
 namespace RestaurantReservation.Application.Controllers;
 
 [ApiController]
-[Route("v1")]
+[Route("v1/reservations")]
 public class ReservationController : ControllerBase
 {
-    [HttpGet("reservations")]
-    public async Task<IActionResult> GetReservationsAsync([FromServices] AppDbContext context)
+    [HttpGet("{phone}")]
+    public async Task<IActionResult> GetPastReservationsAsync([FromServices] AppDbContext context, [FromRoute] GetPastReservationsViewModel model)
     {
-        var reservations = await context.Reservations.AsNoTracking().ToListAsync();
-        return Ok(reservations);
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var today = DateOnly.FromDateTime(DateTime.Now);
+        var reservations = await context.Reservations.AsNoTracking().Where(reservation => reservation.Phone == model.Phone && reservation.Date < today).ToListAsync();
+        return reservations.Count == 0 ? NotFound("Past reservations not found.") : Ok(reservations);
     }
 
-    [HttpPost("reservations")]
+    [HttpPost]
     public async Task<IActionResult> MakeReservationAsync([FromServices] AppDbContext context, [FromBody] MakeReservationViewModel model)
     {
         if (!ModelState.IsValid)
@@ -53,7 +58,7 @@ public class ReservationController : ControllerBase
         }
     }
 
-    [HttpDelete("reservations/{reservationId}")]
+    [HttpDelete("{reservationId}")]
     public async Task<IActionResult> CancelReservationAsync([FromServices] AppDbContext context, [FromRoute] int reservationId)
     {
         var reservation = await context.Reservations.FirstOrDefaultAsync(res => res.Id == reservationId);
