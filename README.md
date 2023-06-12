@@ -5,10 +5,12 @@ Make a reservation is a .NET Core API that allows you to Make a reservation dinn
 .NET Core 6.0, EntityFramework 7.0 with Migrations e C#
 
 # How to Run
-- Make sure that you have installed the .NET Core 6.0
+- Make sure that you have installed the .NET Core 6.0 and the dotnet-ef tool
 - Clone the repo
 - Open your terminal
-- On the root folder of the repo type `cd src/ReservationRestaurant`
+- On the root folder of the repo type `cd src/ReservationRestaurant.Data`
+- Run the migrations with `dotnet ef databse update`
+- Navigate to main project `cd ../ReservationRestaurant`
 - Clean the solution with `dotnet clean`
 - Build the solution with `dotnet build`
 - And run with `dotnet run`
