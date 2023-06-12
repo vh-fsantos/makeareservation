@@ -2,7 +2,7 @@
 Make a reservation is a .NET Core API that allows you to Make a reservation dinner, see the available tables, see old reservations and cancel a reservation.
 
 # Techonologies
-.NET Core 6.0, EntityFramework 7.0 with Migrations e C#
+.NET Core 6.0, EntityFramework 7.0 with Migrations, C# and SQLite for database
 
 # How to Run
 - Make sure that you have installed the .NET Core 6.0 and the dotnet-ef tool
