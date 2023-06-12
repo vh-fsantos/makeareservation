@@ -13,7 +13,7 @@ Make a reservation is a .NET Core API that allows you to Make a reservation dinn
 - Build the solution with `dotnet build`
 - And run with `dotnet run`
 
-For https the API will be listening on: `https://localhost:5001`
+For https the API will be listening on: `https://localhost:5001`\n
 For http the API will be listening on: `http://localhost:5000`
 
 # More Information
