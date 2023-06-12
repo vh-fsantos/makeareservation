@@ -1,7 +1,5 @@
-﻿using System.Runtime.InteropServices;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RestaurantReservation.Application.ViewModels;
 using RestaurantReservation.Data.Connection;
 using RestaurantReservation.Domain.Models;
@@ -25,35 +23,48 @@ public class ReservationController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var availableTables = await context.Tables.ToListAsync();
+        var people = model.People;
+        var date = model.Date;
+        var time = model.Time;
+        var availableTables = await context.Tables.AsNoTracking().Where(table => table.Seats == people).Include(table => table.Reservations).ToListAsync();
+        var availableTable = availableTables.FirstOrDefault(table => table.IsAvailable(date, time));
+
+        if (availableTable == null)
+            return Conflict("No available tables");
+
         var reservation = new Reservation
         {
-            Date = model.Date,
-            Time = model.Time,
-            People = model.People,
+            Date = date,
+            Time = time,
+            People = people,
+            TableId = availableTable.Id
         };
-        var reservations = await context.Reservations.AsNoTracking().Where(res => res.Date == reservation.Date).ToListAsync();
-
-        foreach (var table in availableTables.Where(tb => tb.Seats == reservation.People))
-        {
-            var currentReservation = reservations.FirstOrDefault(res => (reservation.Time >= res.Time.Add(new TimeSpan(0, -59, -59)) || 
-                                                                 reservation.Time <= res.Time.Add(new TimeSpan(0, 59, 59))) && res.TableId == table.Id);
-
-            if (currentReservation == null)
-                continue;
-
-            reservation.TableId = table.Id;
-            break;
-        }
-
-        if (reservation.TableId == -1)
-            return Conflict("No available tables");
 
         try
         {
             await context.Reservations.AddAsync(reservation);
             await context.SaveChangesAsync();
             return Created($"v1/reservations/{reservation.Id}", reservation);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    [HttpDelete("reservations/{reservationId}")]
+    public async Task<IActionResult> CancelReservationAsync([FromServices] AppDbContext context, [FromRoute] int reservationId)
+    {
+        var reservation = await context.Reservations.FirstOrDefaultAsync(res => res.Id == reservationId);
+
+        if (reservation == null)
+            return BadRequest("Reservation doesn't exists");
+
+        try
+        {
+            context.Reservations.Remove(reservation);
+            await context.SaveChangesAsync();
+            return Ok();
         }
         catch (Exception ex)
         {

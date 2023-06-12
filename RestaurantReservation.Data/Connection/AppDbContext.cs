@@ -13,7 +13,9 @@ public class AppDbContext :  DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Reservation>().Ignore(reservation => reservation.Table);
+        modelBuilder.Entity<Reservation>()
+                    .HasOne(reservation => reservation.Table)
+                    .WithMany(table => table.Reservations).HasForeignKey(r => r.TableId);
         base.OnModelCreating(modelBuilder);
     }
 }
