@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RestaurantReservation.Data.Abstractions\RestaurantReservation.Data.Abstractions.csproj" />
     <ProjectReference Include="..\RestaurantReservation.Domain\RestaurantReservation.Domain.csproj" />
   </ItemGroup>
 

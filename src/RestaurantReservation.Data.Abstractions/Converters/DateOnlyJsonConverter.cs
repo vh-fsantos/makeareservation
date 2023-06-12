@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace RestaurantReservation.Data.Converters;
+namespace RestaurantReservation.Data.Abstractions.Converters;
 
 public class DateOnlyJsonConverter : JsonConverter<DateOnly>
 {

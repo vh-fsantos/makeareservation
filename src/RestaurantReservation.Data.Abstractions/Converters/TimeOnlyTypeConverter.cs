@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
 
-namespace RestaurantReservation.Data.Converters;
+namespace RestaurantReservation.Data.Abstractions.Converters;
 
 public class TimeOnlyTypeConverter : TypeConverter
 {

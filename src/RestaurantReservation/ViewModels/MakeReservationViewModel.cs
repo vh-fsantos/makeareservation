@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using RestaurantReservation.Data.Attributes;
-using RestaurantReservation.Data.Converters;
+using RestaurantReservation.Data.Abstractions.Attributes;
+using RestaurantReservation.Data.Abstractions.Converters;
 
 namespace RestaurantReservation.Application.ViewModels;
 
 public class MakeReservationViewModel
 {
     [JsonConverter(typeof(DateOnlyJsonConverter))]
-    [DateRange("2023-06-05", "2023-12-05")]
     public DateOnly Date { get; set; }
     [JsonConverter(typeof(TimeOnlyJsonConverter))]
     [TimeRange("18:00:00", "23:00:00")]

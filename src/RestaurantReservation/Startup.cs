@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantReservation.Application.Extensions;
+using RestaurantReservation.Data.Abstractions.Connection;
+using RestaurantReservation.Data.Connection;
 using RestaurantReservation.Data.Extensions;
 
 namespace RestaurantReservation;
@@ -14,6 +16,7 @@ public class Startup
             options.SuppressModelStateInvalidFilter = true;
         });
         services.AddSqlLiteContext();
+        services.AddScoped<IAppDbContext, AppDbContext>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

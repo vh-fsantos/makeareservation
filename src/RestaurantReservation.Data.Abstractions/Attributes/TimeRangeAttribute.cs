@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RestaurantReservation.Data.Attributes;
+namespace RestaurantReservation.Data.Abstractions.Attributes;
 
 public class TimeRangeAttribute : ValidationAttribute
 {

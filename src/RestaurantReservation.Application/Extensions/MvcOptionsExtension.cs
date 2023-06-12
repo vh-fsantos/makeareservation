@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc;
-using RestaurantReservation.Data.Converters;
+using RestaurantReservation.Data.Abstractions.Converters;
 
 namespace RestaurantReservation.Application.Extensions;
 
