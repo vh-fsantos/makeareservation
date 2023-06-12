@@ -29,6 +29,9 @@ namespace RestaurantReservation.Data.Migrations
                     b.Property<int>("People")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("TableId")
                         .HasColumnType("INTEGER");
 

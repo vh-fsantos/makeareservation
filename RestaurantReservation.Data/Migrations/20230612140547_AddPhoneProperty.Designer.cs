@@ -11,8 +11,8 @@ using RestaurantReservation.Data.Connection;
 namespace RestaurantReservation.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230612063749_ChangeOnModelCreating")]
-    partial class ChangeOnModelCreating
+    [Migration("20230612140547_AddPhoneProperty")]
+    partial class AddPhoneProperty
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,9 @@ namespace RestaurantReservation.Data.Migrations
                     b.Property<int>("People")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("TableId")
                         .HasColumnType("INTEGER");
 
@@ -39,6 +42,8 @@ namespace RestaurantReservation.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TableId");
 
                     b.ToTable("Reservations");
                 });
@@ -55,6 +60,22 @@ namespace RestaurantReservation.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tables");
+                });
+
+            modelBuilder.Entity("RestaurantReservation.Domain.Models.Reservation", b =>
+                {
+                    b.HasOne("RestaurantReservation.Domain.Models.Table", "Table")
+                        .WithMany("Reservations")
+                        .HasForeignKey("TableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Table");
+                });
+
+            modelBuilder.Entity("RestaurantReservation.Domain.Models.Table", b =>
+                {
+                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }

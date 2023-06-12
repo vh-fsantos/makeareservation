@@ -37,7 +37,8 @@ public class ReservationController : ControllerBase
             Date = date,
             Time = time,
             People = people,
-            TableId = availableTable.Id
+            TableId = availableTable.Id,
+            Phone = model.Phone
         };
 
         try
