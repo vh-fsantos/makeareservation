@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestaurantReservation.Data.Abstractions.Connection;
 using RestaurantReservation.Domain.Models;
 
 namespace RestaurantReservation.Data.Connection;
 
-public class AppDbContext :  DbContext, IAppDbContext
+public class AppDbContext :  DbContext
 {
-    public DbSet<Table> Tables { get; set; }
-    public DbSet<Reservation> Reservations { get; set; }
+    public virtual DbSet<Table> Tables { get; set; }
+    public virtual DbSet<Reservation> Reservations { get; set; }
 
     public async Task<int> SaveChangesAsync() 
         => await base.SaveChangesAsync();
