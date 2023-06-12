@@ -24,7 +24,8 @@ public class Startup
 
         app.UseSwagger();
         app.UseSwaggerUI();
-
+        app.UseHttpsRedirection();
+        app.UseAuthorization();
         app.UseRouting();
         app.UseEndpoints(endpoints => endpoints.MapControllerRoute("default", "{controller=home}/{action=Index}/{id?}"));
     }
