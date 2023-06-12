@@ -3,13 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservation", "RestaurantReservation\RestaurantReservation.csproj", "{B5B0728F-03B2-4852-949A-CE0CE40AA2A4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{025C07E6-CAD8-45A1-B368-CB214C456F66}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservation.Domain", "RestaurantReservation.Domain\RestaurantReservation.Domain.csproj", "{37FA1781-1A00-426D-A5AF-19B98BB0C4F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservation", "src\RestaurantReservation\RestaurantReservation.csproj", "{91C0FECC-BFED-464B-9CB3-06FE73951D89}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservation.Data", "RestaurantReservation.Data\RestaurantReservation.Data.csproj", "{D4C6C1B1-A98E-4C84-8CF6-B33765620338}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservation.Application", "src\RestaurantReservation.Application\RestaurantReservation.Application.csproj", "{E2EE7BC8-1C70-49DC-BDEB-377F89F3E330}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservation.Application", "RestaurantReservation.Application\RestaurantReservation.Application.csproj", "{41B72539-998E-4D18-A95C-344CF122F81D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservation.Data", "src\RestaurantReservation.Data\RestaurantReservation.Data.csproj", "{10022462-7402-4177-8D35-5EA4983213B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantReservation.Domain", "src\RestaurantReservation.Domain\RestaurantReservation.Domain.csproj", "{3C635FE8-69A4-44F7-9B99-E30F9E93E9C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{14DA0202-15D3-43C5-B73E-EC36198E61DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReservation.Application", "tests\RestaurantReservation.Application\RestaurantReservation.Application.csproj", "{B1EEF213-D065-4C3C-9578-1218DB4C2675}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,25 +23,36 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B5B0728F-03B2-4852-949A-CE0CE40AA2A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5B0728F-03B2-4852-949A-CE0CE40AA2A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5B0728F-03B2-4852-949A-CE0CE40AA2A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5B0728F-03B2-4852-949A-CE0CE40AA2A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37FA1781-1A00-426D-A5AF-19B98BB0C4F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37FA1781-1A00-426D-A5AF-19B98BB0C4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37FA1781-1A00-426D-A5AF-19B98BB0C4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37FA1781-1A00-426D-A5AF-19B98BB0C4F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D4C6C1B1-A98E-4C84-8CF6-B33765620338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D4C6C1B1-A98E-4C84-8CF6-B33765620338}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D4C6C1B1-A98E-4C84-8CF6-B33765620338}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D4C6C1B1-A98E-4C84-8CF6-B33765620338}.Release|Any CPU.Build.0 = Release|Any CPU
-		{41B72539-998E-4D18-A95C-344CF122F81D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41B72539-998E-4D18-A95C-344CF122F81D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41B72539-998E-4D18-A95C-344CF122F81D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{41B72539-998E-4D18-A95C-344CF122F81D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91C0FECC-BFED-464B-9CB3-06FE73951D89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91C0FECC-BFED-464B-9CB3-06FE73951D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91C0FECC-BFED-464B-9CB3-06FE73951D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91C0FECC-BFED-464B-9CB3-06FE73951D89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2EE7BC8-1C70-49DC-BDEB-377F89F3E330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2EE7BC8-1C70-49DC-BDEB-377F89F3E330}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2EE7BC8-1C70-49DC-BDEB-377F89F3E330}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2EE7BC8-1C70-49DC-BDEB-377F89F3E330}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10022462-7402-4177-8D35-5EA4983213B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10022462-7402-4177-8D35-5EA4983213B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10022462-7402-4177-8D35-5EA4983213B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10022462-7402-4177-8D35-5EA4983213B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C635FE8-69A4-44F7-9B99-E30F9E93E9C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C635FE8-69A4-44F7-9B99-E30F9E93E9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C635FE8-69A4-44F7-9B99-E30F9E93E9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C635FE8-69A4-44F7-9B99-E30F9E93E9C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1EEF213-D065-4C3C-9578-1218DB4C2675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1EEF213-D065-4C3C-9578-1218DB4C2675}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1EEF213-D065-4C3C-9578-1218DB4C2675}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1EEF213-D065-4C3C-9578-1218DB4C2675}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{91C0FECC-BFED-464B-9CB3-06FE73951D89} = {025C07E6-CAD8-45A1-B368-CB214C456F66}
+		{E2EE7BC8-1C70-49DC-BDEB-377F89F3E330} = {025C07E6-CAD8-45A1-B368-CB214C456F66}
+		{10022462-7402-4177-8D35-5EA4983213B0} = {025C07E6-CAD8-45A1-B368-CB214C456F66}
+		{3C635FE8-69A4-44F7-9B99-E30F9E93E9C3} = {025C07E6-CAD8-45A1-B368-CB214C456F66}
+		{B1EEF213-D065-4C3C-9578-1218DB4C2675} = {14DA0202-15D3-43C5-B73E-EC36198E61DC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {06903F57-F4C5-4109-A1A8-162CEA0706CB}
